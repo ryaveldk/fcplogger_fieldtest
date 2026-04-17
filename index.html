@@ -891,6 +891,158 @@
   .hint-s5 { left: calc(50% - 60px); top: 36px; width: 120px; height: 130px; }
   .hint-s5-label { left: calc(50% - 100px); top: 12px; transform: rotate(-5deg); font-size: 26px; }
 
+  /* FCPLogger logo (slide 0) */
+  .fcp-logo {
+    font-family: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 60px;
+    letter-spacing: -1.8px;
+    line-height: 1;
+    background: linear-gradient(180deg, #ffffff 0%, #dce9ff 30%, #7fb0ff 62%, #3c6fd0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(120, 170, 255, 0.1);
+  }
+  .fcp-tagline {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .welcome-primary {
+    font-size: 16px;
+    color: #f0f0f0;
+    font-weight: 600;
+    margin-bottom: 16px;
+    max-width: 480px;
+    line-height: 1.45;
+    text-align: center;
+  }
+  .welcome-dim {
+    font-size: 13.5px;
+    color: #6a6a6a;
+    line-height: 1.6;
+    max-width: 460px;
+    margin-bottom: 22px;
+    text-align: center;
+  }
+  .welcome-tip {
+    font-size: 12.5px;
+    color: #5a5a5a;
+    line-height: 1.55;
+    max-width: 440px;
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    border: 1px solid #1e1e22;
+    text-align: center;
+  }
+
+  /* Slide 3 typing animation */
+  .m-typed {
+    display: inline-block;
+    min-height: 18px;
+    white-space: pre;
+  }
+
+  /* Slide 4 inline down-arrow (Tab → entry) */
+  .hint-inline-arrow {
+    overflow: visible;
+    margin: 4px auto;
+    display: block;
+  }
+  .hint-inline-arrow path {
+    fill: none;
+    stroke: var(--orange);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(255,140,60,0.4));
+  }
+  .hint-inline-arrow .inline-curve {
+    stroke-dasharray: 42;
+    stroke-dashoffset: 42;
+  }
+  .hint-inline-arrow .inline-head { opacity: 0; }
+  .guide-slide.active[data-slide="4"] .hint-inline-arrow .inline-curve {
+    animation: drawCurve 0.6s cubic-bezier(.55,.2,.3,1) 0.35s forwards;
+  }
+  .guide-slide.active[data-slide="4"] .hint-inline-arrow .inline-head {
+    animation: fadeHead 0.25s ease-out 0.9s forwards;
+  }
+
+  /* Slide 5 pointer — positioned in guide-container, points at Start øvelse button */
+  .guide-container { position: relative; }
+  .s5-pointer {
+    position: absolute;
+    bottom: 68px;
+    right: 24px;
+    width: 200px;
+    height: 100px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.55s ease-out 0.25s;
+    z-index: 5;
+  }
+  .s5-pointer.visible { opacity: 1; }
+  .s5-pointer svg { overflow: visible; display: block; }
+  .s5-pointer path {
+    fill: none;
+    stroke: var(--orange);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(255,140,60,0.35));
+  }
+  .s5-pointer .s5-curve {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+  }
+  .s5-pointer .s5-head { opacity: 0; }
+  .s5-pointer.visible .s5-curve {
+    animation: drawCurve 0.8s cubic-bezier(.55,.2,.3,1) 0.4s forwards;
+  }
+  .s5-pointer.visible .s5-head {
+    animation: fadeHead 0.25s ease-out 1.15s forwards;
+  }
+  .s5-pointer .s5-handwritten {
+    position: absolute;
+    left: 10px; top: -4px;
+    font-family: "Caveat", "Bradley Hand", cursive;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--orange);
+    transform: rotate(-5deg);
+    text-shadow: 0 0 12px rgba(255,140,60,0.3);
+    opacity: 0;
+    transition: opacity 0.4s ease-out 0.35s;
+  }
+  .s5-pointer.visible .s5-handwritten { opacity: 1; }
+
+  /* Guide → dashboard transition */
+  #guide.exiting {
+    animation: guideExit 0.55s cubic-bezier(.55,.0,.5,1) forwards;
+  }
+  @keyframes guideExit {
+    0% { opacity: 1; transform: scale(1); filter: blur(0); }
+    100% { opacity: 0; transform: scale(1.06); filter: blur(6px); }
+  }
+  #dashboard.entering {
+    animation: dashEnter 0.75s cubic-bezier(.2,.8,.3,1) forwards;
+    transform-origin: center center;
+  }
+  @keyframes dashEnter {
+    0% { opacity: 0; transform: scale(0.94); filter: blur(4px); }
+    60% { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hint-arrow .curve { stroke-dashoffset: 0 !important; animation: none !important; }
     .hint-arrow .head { opacity: 1 !important; animation: none !important; }
@@ -924,20 +1076,11 @@
 
         <!-- Slide 0: Velkommen -->
         <div class="guide-slide active" data-slide="0">
-          <div class="guide-visual" style="flex-direction:column;min-height:140px;gap:0;">
-            <div class="guide-welcome-title">HALLOWEEN</div>
-            <div class="guide-welcome-sub">
-              <span class="bdot"></span>
-              <span class="bl">Reality</span>
-              <span style="color:#444">·</span>
-              <span>25 fps</span>
-            </div>
-          </div>
-          <div class="guide-title">Øvebane til feltdagen</div>
-          <div class="guide-sub">
-            Her kan du øve dig i logger-flowet inden den 21. april.<br>
-            4 korte trin — så er du klar.
-          </div>
+          <div class="fcp-logo">FCPLogger</div>
+          <div class="fcp-tagline">Alt der sker. Ét sted.</div>
+          <div class="welcome-primary">Øvebane til optagelser i Stockholm den 21. april 2026</div>
+          <div class="welcome-dim">Her kan du trygt gøre dig bekendt med FCPLogger brugerfladen, så du er klar til på tirsdag.</div>
+          <div class="welcome-tip">Hvis du vil tilbage til den her startside, kan du altid trykke på spørgsmålstegnet øverst i venstre hjørne.</div>
         </div>
 
         <!-- Slide 1: Vælg dagen -->
@@ -957,7 +1100,7 @@
           </div>
           <div class="guide-title">Vælg dagen</div>
           <div class="guide-sub">
-            Klik på <strong>DAG 1</strong>-mappen for at åbne log-sessionen.
+            Klik på <strong>DAG 1</strong>-mappen for at åbne din log-session.
           </div>
         </div>
 
@@ -974,7 +1117,7 @@
             </svg>
             <div class="hint-label hint-s2-label">Tryk Tab</div>
           </div>
-          <div class="guide-title">Tryk Tab for at starte</div>
+          <div class="guide-title">Tryk på Tab for at begynde din log</div>
           <div class="guide-sub">
             Et tidsstempel sættes og et input-felt åbner sig midt på skærmen.
           </div>
@@ -990,7 +1133,7 @@
                 <span class="m-ts">14:26:38:22</span>
                 <span class="m-dur">0:09</span>
               </div>
-              <div class="m-text">Her skriver man tekst<span class="m-caret"></span></div>
+              <div class="m-text"><span class="m-typed" id="s3TypedText"></span><span class="m-caret"></span></div>
             </div>
             <svg class="hint-arrow hint-s3" viewBox="0 0 155 90">
               <path class="curve" d="M 140 16 Q 85 -8, 14 58" />
@@ -1000,28 +1143,26 @@
           </div>
           <div class="guide-title">Skriv hvad der sker</div>
           <div class="guide-sub">
-            Skriv løs mens loggen er åben. <strong>Enter</strong> giver linjeskift.
+            Du kan skrive mens loggen er åben. Husk <strong>Enter</strong> giver linjeskift.
           </div>
         </div>
 
         <!-- Slide 4: Gem -->
         <div class="guide-slide" data-slide="4">
           <div class="guide-num">4</div>
-          <div class="guide-visual" style="flex-direction:column;gap:12px;">
+          <div class="guide-visual" style="flex-direction:column;gap:4px;">
             <div class="kbd-big">Tab</div>
-            <div class="guide-arrow">↓</div>
+            <svg class="hint-inline-arrow" viewBox="0 0 40 52" width="34" height="44">
+              <path class="inline-curve" d="M 20 4 L 20 40" />
+              <path class="inline-head" d="M 20 40 L 12 32 M 20 40 L 28 32" />
+            </svg>
             <div class="mini-entry-row">
               <span class="me-time">14:26:38:22</span>
               <span class="me-text">Her skriver man tekst</span>
               <span class="me-dur">0:11</span>
             </div>
-            <svg class="hint-arrow hint-s4" viewBox="0 0 110 85">
-              <path class="curve" d="M 95 12 Q 30 5, 14 60" />
-              <path class="head" d="M 14 60 L 21 53 M 14 60 L 12 50" />
-            </svg>
-            <div class="hint-label hint-s4-label">Tryk igen</div>
           </div>
-          <div class="guide-title">Tryk Tab igen for at gemme</div>
+          <div class="guide-title">Tryk Tab igen for at lukke din log</div>
           <div class="guide-sub">
             Loggen lægges i listen med start- og slut-tidsstempel.<br>
             <span class="kbd-sm">Esc</span> annullerer uden at gemme.
@@ -1030,12 +1171,8 @@
 
         <!-- Slide 5: Klar -->
         <div class="guide-slide" data-slide="5">
-          <div class="guide-visual" style="min-height:180px;">
-            <svg class="hint-arrow hint-s5" viewBox="0 0 120 140">
-              <path class="curve" d="M 60 10 Q 18 70, 60 128" />
-              <path class="head" d="M 60 128 L 59 118 M 60 128 L 51 124" />
-            </svg>
-            <div class="hint-label hint-s5-label">Tryk her ↓</div>
+          <div class="guide-visual" style="min-height:110px;">
+            <div style="font-size:54px;color:var(--orange);opacity:.75;line-height:1;">✓</div>
           </div>
           <div class="guide-title">Klar til at øve?</div>
           <div class="guide-sub">
@@ -1043,6 +1180,14 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="s5-pointer" id="s5Pointer">
+        <svg viewBox="0 0 200 100" width="200" height="100">
+          <path class="s5-curve" d="M 15 18 Q 110 12, 175 82" />
+          <path class="s5-head" d="M 175 82 L 173 71 M 175 82 L 165 79" />
+        </svg>
+        <div class="s5-handwritten">Tryk her!</div>
       </div>
 
       <div class="guide-nav">
@@ -1349,8 +1494,48 @@
   const $gdots = $guide.querySelectorAll('.guide-dots .gdot');
   const $gPrev = document.getElementById('guidePrev');
   const $gNext = document.getElementById('guideNext');
+  const $s5Pointer = document.getElementById('s5Pointer');
+  const $typedText = document.getElementById('s3TypedText');
   const TOTAL = $slides.length;
   let gSlide = 0;
+
+  // Slide 3 typing animation
+  const TYPE_TEXT = 'Her skriver man tekst';
+  let typingTimer = null;
+  function stopTyping() {
+    if (typingTimer) { clearTimeout(typingTimer); typingTimer = null; }
+    if ($typedText) $typedText.textContent = '';
+  }
+  function startTyping() {
+    stopTyping();
+    let i = 0;
+    let mode = 'type';
+    const tick = () => {
+      if (mode === 'type') {
+        i++;
+        $typedText.textContent = TYPE_TEXT.substring(0, i);
+        if (i >= TYPE_TEXT.length) {
+          mode = 'pause';
+          typingTimer = setTimeout(tick, 2200);
+          return;
+        }
+        typingTimer = setTimeout(tick, 85 + Math.random() * 70);
+      } else if (mode === 'pause') {
+        mode = 'delete';
+        typingTimer = setTimeout(tick, 40);
+      } else if (mode === 'delete') {
+        i--;
+        $typedText.textContent = TYPE_TEXT.substring(0, i);
+        if (i <= 0) {
+          mode = 'type';
+          typingTimer = setTimeout(tick, 650);
+          return;
+        }
+        typingTimer = setTimeout(tick, 28);
+      }
+    };
+    typingTimer = setTimeout(tick, 700);
+  }
 
   function showGuide() {
     $dashboard.hidden = true;
@@ -1365,11 +1550,20 @@
     $gdots.forEach((d, i) => d.classList.toggle('active', i === gSlide));
     $gPrev.classList.toggle('disabled', gSlide === 0);
     $gNext.textContent = (gSlide === TOTAL - 1) ? 'Start øvelse →' : 'Næste →';
+    if ($s5Pointer) $s5Pointer.classList.toggle('visible', gSlide === TOTAL - 1);
+    if (gSlide === 3) startTyping(); else stopTyping();
   }
   function finishGuide() {
     localStorage.setItem(GUIDE_FLAG, '1');
-    $guide.hidden = true;
-    showDashboard();
+    stopTyping();
+    $guide.classList.add('exiting');
+    setTimeout(() => {
+      $guide.hidden = true;
+      $guide.classList.remove('exiting');
+      showDashboard();
+      $dashboard.classList.add('entering');
+      setTimeout(() => $dashboard.classList.remove('entering'), 800);
+    }, 450);
   }
   $gPrev.addEventListener('click', () => goToSlide(gSlide - 1));
   $gNext.addEventListener('click', () => {
