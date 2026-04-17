@@ -1793,8 +1793,12 @@
   }
 
   function showGuide() {
-    $dashboard.hidden = true;
-    $session.hidden = true;
+    if (typeof hideAllScreens === 'function') {
+      hideAllScreens();
+    } else {
+      $dashboard.hidden = true;
+      $session.hidden = true;
+    }
     $guide.hidden = false;
     state.inSession = false;
     goToSlide(0);
