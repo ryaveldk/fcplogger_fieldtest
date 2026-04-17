@@ -1049,6 +1049,216 @@
     100% { opacity: 1; transform: scale(1); filter: blur(0); }
   }
 
+  /* ======== LOGGER SELECT ======== */
+  #loggerSelect {
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  #loggerSelect::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(40, 55, 90, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .ls-wrapper {
+    text-align: center;
+    position: relative; z-index: 2;
+    padding: 20px;
+  }
+  .ls-prod {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .ls-title {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .ls-sub {
+    font-size: 12.5px;
+    color: #888;
+    margin-bottom: 40px;
+  }
+  .ls-cards {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ls-card {
+    background: linear-gradient(145deg, rgba(40, 45, 55, 0.45) 0%, rgba(20, 24, 32, 0.78) 100%);
+    border: 1px solid #24262b;
+    border-radius: 16px;
+    padding: 26px 22px 22px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+    width: 146px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    font-family: inherit;
+    color: inherit;
+  }
+  .ls-card:hover {
+    transform: translateY(-3px);
+    border-color: #3a3d42;
+    box-shadow: 0 0 40px rgba(140, 160, 200, 0.12);
+  }
+  .ls-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--c);
+    color: #fff;
+    font-size: 30px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 34px var(--c), inset 0 2px 0 rgba(255,255,255,0.15);
+  }
+  .ls-name {
+    color: #f0f0f0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* ======== PIN ENTRY ======== */
+  #loggerPin {
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    --lp-color: #ff8c3c;
+    --lp-glow: rgba(255, 140, 60, 0.22);
+    --lp-glow-ring: rgba(255, 140, 60, 0.2);
+  }
+  #loggerPin::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 48% 55% at 50% 45%, var(--lp-glow) 0%, transparent 65%);
+    pointer-events: none;
+    transition: background 0.3s;
+  }
+  .lp-wrapper {
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .lp-avatar {
+    width: 102px;
+    height: 102px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.35);
+    border: 2px solid var(--lp-color);
+    color: var(--lp-color);
+    font-size: 46px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 60px var(--lp-color), inset 0 0 20px rgba(0,0,0,0.2);
+  }
+  .lp-name {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .lp-sub {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 2.5px;
+    font-weight: 600;
+    margin-bottom: 34px;
+  }
+  .lp-input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid var(--lp-color);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 17px;
+    font-family: "SF Mono", Menlo, monospace;
+    text-align: center;
+    letter-spacing: 10px;
+    font-weight: 600;
+    outline: none;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  .lp-input::placeholder {
+    color: #555;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+  .lp-input:focus {
+    box-shadow: 0 0 0 3px var(--lp-glow-ring);
+  }
+  .lp-unlock {
+    width: 100%;
+    padding: 12px 18px;
+    background: var(--lp-color);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    opacity: 0.4;
+    transition: opacity 0.2s, box-shadow 0.2s, filter 0.15s;
+    margin-bottom: 22px;
+  }
+  .lp-unlock.ready {
+    opacity: 1;
+    box-shadow: 0 0 22px var(--lp-glow);
+  }
+  .lp-unlock.ready:hover { filter: brightness(1.12); }
+  .lp-unlock:not(.ready) { cursor: default; }
+  .lp-back {
+    font-size: 12.5px;
+    color: #888;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    display: inline-block;
+  }
+  .lp-back:hover { color: #fff; }
+
+  /* Mac-style shake on wrong PIN */
+  @keyframes shakeError {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    10%, 30%, 50%, 70%, 90% { transform: translate3d(-9px, 0, 0); }
+    20%, 40%, 60%, 80% { transform: translate3d(9px, 0, 0); }
+  }
+  .shake { animation: shakeError 0.45s cubic-bezier(.36,.07,.19,.97) both; }
+
+  /* Generic screen transitions (for loggerSelect/loggerPin) */
+  #loggerSelect.entering, #loggerPin.entering {
+    animation: dashEnter 0.7s cubic-bezier(.2,.8,.3,1) forwards;
+    transform-origin: center center;
+  }
+  #loggerSelect.exiting, #loggerPin.exiting {
+    animation: guideExit 0.45s cubic-bezier(.55,.0,.5,1) forwards;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hint-arrow .curve { stroke-dashoffset: 0 !important; animation: none !important; }
     .hint-arrow .head { opacity: 1 !important; animation: none !important; }
@@ -1208,6 +1418,45 @@
         </div>
         <button class="guide-btn primary" id="guideNext">Næste →</button>
       </div>
+    </div>
+  </div>
+
+  <!-- LOGGER SELECT SCREEN -->
+  <div id="loggerSelect" class="screen" hidden>
+    <div class="ls-wrapper">
+      <div class="ls-prod">HALLOWEEN</div>
+      <div class="ls-title">Vælg logger</div>
+      <div class="ls-sub">Denne maskine logger for den valgte person</div>
+      <div class="ls-cards">
+        <button class="ls-card" data-logger="mathias">
+          <div class="ls-avatar" style="--c:#4a90ff">M</div>
+          <div class="ls-name">Mathias K</div>
+        </button>
+        <button class="ls-card" data-logger="caroline">
+          <div class="ls-avatar" style="--c:#ff8c3c">C</div>
+          <div class="ls-name">Caroline</div>
+        </button>
+        <button class="ls-card" data-logger="mambo">
+          <div class="ls-avatar" style="--c:#34c759">M</div>
+          <div class="ls-name">Mambo</div>
+        </button>
+        <button class="ls-card" data-logger="ole">
+          <div class="ls-avatar" style="--c:#af7eff">O</div>
+          <div class="ls-name">Ole</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGGER PIN SCREEN -->
+  <div id="loggerPin" class="screen" hidden>
+    <div class="lp-wrapper" id="lpWrapper">
+      <div class="lp-avatar" id="lpAvatar">C</div>
+      <div class="lp-name" id="lpName">Caroline</div>
+      <div class="lp-sub">INDTAST PIN</div>
+      <input type="password" class="lp-input" id="lpInput" placeholder="PIN" maxlength="4" inputmode="numeric" autocomplete="off" />
+      <button class="lp-unlock" id="lpUnlock">Lås op</button>
+      <div><a class="lp-back" id="lpBack">← Tilbage</a></div>
     </div>
   </div>
 
@@ -1566,11 +1815,116 @@
     setTimeout(() => {
       $guide.hidden = true;
       $guide.classList.remove('exiting');
-      showDashboard();
-      $dashboard.classList.add('entering');
-      setTimeout(() => $dashboard.classList.remove('entering'), 800);
+      showLoggerSelect(true);
     }, 450);
   }
+
+  // ===== Login flow =====
+  const LOGGERS = [
+    { id: 'mathias',  name: 'Mathias K', initial: 'M', color: '#4a90ff', glow: 'rgba(74, 144, 255, 0.24)', ring: 'rgba(74, 144, 255, 0.22)' },
+    { id: 'caroline', name: 'Caroline',  initial: 'C', color: '#ff8c3c', glow: 'rgba(255, 140, 60, 0.24)', ring: 'rgba(255, 140, 60, 0.22)' },
+    { id: 'mambo',    name: 'Mambo',     initial: 'M', color: '#34c759', glow: 'rgba(52, 199, 89, 0.24)',  ring: 'rgba(52, 199, 89, 0.22)' },
+    { id: 'ole',      name: 'Ole',       initial: 'O', color: '#af7eff', glow: 'rgba(175, 126, 255, 0.26)', ring: 'rgba(175, 126, 255, 0.22)' },
+  ];
+  const LOGGER_PIN = '1234';
+  let currentLogger = null;
+
+  const $loggerSelect = document.getElementById('loggerSelect');
+  const $loggerPin = document.getElementById('loggerPin');
+  const $lpWrapper = document.getElementById('lpWrapper');
+  const $lpAvatar = document.getElementById('lpAvatar');
+  const $lpName = document.getElementById('lpName');
+  const $lpInput = document.getElementById('lpInput');
+  const $lpUnlock = document.getElementById('lpUnlock');
+  const $lpBack = document.getElementById('lpBack');
+
+  function hideAllScreens() {
+    $guide.hidden = true;
+    $dashboard.hidden = true;
+    $session.hidden = true;
+    $loggerSelect.hidden = true;
+    $loggerPin.hidden = true;
+  }
+
+  function showLoggerSelect(animate) {
+    hideAllScreens();
+    state.inSession = false;
+    $loggerSelect.hidden = false;
+    if (animate) {
+      $loggerSelect.classList.add('entering');
+      setTimeout(() => $loggerSelect.classList.remove('entering'), 800);
+    }
+  }
+
+  function showLoggerPin(logger, animate) {
+    currentLogger = logger;
+    $lpAvatar.textContent = logger.initial;
+    $lpName.textContent = logger.name;
+    $loggerPin.style.setProperty('--lp-color', logger.color);
+    $loggerPin.style.setProperty('--lp-glow', logger.glow);
+    $loggerPin.style.setProperty('--lp-glow-ring', logger.ring);
+    $lpInput.value = '';
+    $lpUnlock.classList.remove('ready');
+    $lpWrapper.classList.remove('shake');
+
+    hideAllScreens();
+    $loggerPin.hidden = false;
+    if (animate) {
+      $loggerPin.classList.add('entering');
+      setTimeout(() => $loggerPin.classList.remove('entering'), 800);
+    }
+    setTimeout(() => $lpInput.focus(), 120);
+  }
+
+  function applyLoggerToSession(logger) {
+    const av = document.querySelector('.session-header .avatar');
+    const nm = document.querySelector('.session-header .avatar-name');
+    if (av) { av.textContent = logger.initial; av.style.background = logger.color; }
+    if (nm) { nm.textContent = logger.name; nm.style.color = logger.color; }
+  }
+
+  function tryUnlock() {
+    const pin = $lpInput.value;
+    if (pin === LOGGER_PIN) {
+      applyLoggerToSession(currentLogger);
+      $loggerPin.classList.add('exiting');
+      setTimeout(() => {
+        $loggerPin.hidden = true;
+        $loggerPin.classList.remove('exiting');
+        showDashboard();
+        $dashboard.classList.add('entering');
+        setTimeout(() => $dashboard.classList.remove('entering'), 800);
+      }, 420);
+    } else {
+      // Wrong PIN — shake wrapper, clear input, keep focus
+      $lpWrapper.classList.remove('shake');
+      void $lpWrapper.offsetWidth;
+      $lpWrapper.classList.add('shake');
+      setTimeout(() => {
+        $lpInput.value = '';
+        $lpUnlock.classList.remove('ready');
+        $lpInput.focus();
+      }, 450);
+    }
+  }
+
+  document.querySelectorAll('.ls-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.logger;
+      const logger = LOGGERS.find(l => l.id === id);
+      if (logger) showLoggerPin(logger, true);
+    });
+  });
+
+  $lpInput.addEventListener('input', () => {
+    $lpInput.value = $lpInput.value.replace(/[^0-9]/g, '').slice(0, 4);
+    $lpUnlock.classList.toggle('ready', $lpInput.value.length === 4);
+  });
+  $lpInput.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') { ev.preventDefault(); tryUnlock(); }
+  });
+  $lpUnlock.addEventListener('click', tryUnlock);
+  $lpBack.addEventListener('click', () => showLoggerSelect(false));
   $gPrev.addEventListener('click', () => goToSlide(gSlide - 1));
   $gNext.addEventListener('click', () => {
     if (gSlide === TOTAL - 1) finishGuide();
@@ -1586,8 +1940,8 @@
     showGuide();
   });
 
-  // Initial view: guide first visit, otherwise dashboard
-  if (localStorage.getItem(GUIDE_FLAG) === '1') showDashboard();
+  // Initial view: guide first visit, otherwise logger-select (PIN each reload)
+  if (localStorage.getItem(GUIDE_FLAG) === '1') showLoggerSelect(false);
   else showGuide();
 })();
 </script>
