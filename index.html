@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FCPLogger — Øvebane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0b0b0d;
@@ -761,6 +764,143 @@
     background: var(--orange);
     transform: scale(1.35);
   }
+
+  /* ======== HINT ARROWS ======== */
+  .guide-visual { position: relative; }
+  .hint-arrow {
+    position: absolute;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .hint-arrow path {
+    fill: none;
+    stroke: var(--orange);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(255,140,60,0.35));
+  }
+  .hint-arrow .curve {
+    stroke-dasharray: 260;
+    stroke-dashoffset: 260;
+  }
+  .hint-arrow .head { opacity: 0; }
+  .guide-slide.active .hint-arrow .curve {
+    animation: drawCurve 0.8s cubic-bezier(.55,.2,.3,1) 0.35s forwards;
+  }
+  .guide-slide.active .hint-arrow .head {
+    animation: fadeHead 0.25s ease-out 1.05s forwards;
+  }
+  @keyframes drawCurve { to { stroke-dashoffset: 0; } }
+  @keyframes fadeHead { to { opacity: 1; } }
+
+  .hint-label {
+    position: absolute;
+    font-family: "Caveat", "Bradley Hand", "Segoe Script", cursive;
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    opacity: 0;
+    z-index: 4;
+    text-shadow: 0 0 12px rgba(255,140,60,0.25);
+    transition: opacity 0.5s ease-out 0.25s;
+  }
+  .guide-slide.active .hint-label { opacity: 1; }
+
+  /* Target pulses */
+  .guide-slide.active[data-slide="1"] .mini-day-card {
+    animation: cardPulse 2.4s ease-in-out 1.1s infinite;
+  }
+  @keyframes cardPulse {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 0 40px rgba(255,140,60,0.18);
+    }
+    50% {
+      transform: translateY(-3px);
+      box-shadow: 0 0 70px rgba(255,140,60,0.38);
+    }
+  }
+
+  .guide-slide.active[data-slide="2"] .kbd-big,
+  .guide-slide.active[data-slide="4"] .kbd-big {
+    animation: keyTap 2.1s ease-in-out 1.1s infinite;
+  }
+  @keyframes keyTap {
+    0%, 40%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 3px 0 #0a0a0a, inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    50% {
+      transform: translateY(3px);
+      box-shadow: 0 0 0 #0a0a0a, inset 0 1px 0 rgba(255,255,255,0.08), 0 0 18px rgba(255,140,60,0.35);
+    }
+    60% {
+      transform: translateY(0);
+    }
+  }
+
+  .guide-slide.active[data-slide="3"] .mini-overlay {
+    animation: overlayGlow 2.4s ease-in-out 1.1s infinite;
+  }
+  @keyframes overlayGlow {
+    0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+    50% { box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 26px rgba(255,140,60,0.22); }
+  }
+
+  .guide-slide.active[data-slide="4"] .mini-entry-row {
+    animation: entryGlow 2.4s ease-in-out 1.1s infinite;
+  }
+  @keyframes entryGlow {
+    0%, 100% { background: rgba(255,255,255,0.03); }
+    50% { background: rgba(255,140,60,0.08); }
+  }
+
+  .guide-slide.active[data-slide="5"] ~ .guide-nav .guide-btn.primary,
+  body:has(.guide-slide.active[data-slide="5"]) #guideNext {
+    animation: ctaPulse 1.8s ease-in-out 0.5s infinite;
+  }
+  @keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 2px 14px rgba(255,140,60,0.3); }
+    50% { box-shadow: 0 2px 24px rgba(255,140,60,0.6), 0 0 0 4px rgba(255,140,60,0.12); }
+  }
+
+  /* Per-slide hint positions */
+  /* Slide 1: arrow from upper-left to card */
+  .hint-s1 { left: calc(50% - 215px); top: -8px; width: 160px; height: 110px; }
+  .hint-s1-label { left: calc(50% - 235px); top: -32px; transform: rotate(-8deg); }
+
+  /* Slide 2: arrow from upper-right to Tab key */
+  .hint-s2 { left: calc(50% + 35px); top: -20px; width: 140px; height: 110px; }
+  .hint-s2-label { left: calc(50% + 55px); top: -42px; transform: rotate(7deg); }
+
+  /* Slide 3: arrow from right, into overlay text */
+  .hint-s3 { left: calc(50% + 95px); top: 8px; width: 155px; height: 90px; }
+  .hint-s3-label { left: calc(50% + 135px); top: -14px; transform: rotate(5deg); }
+
+  /* Slide 4: label above Tab → arrow down to entry */
+  .hint-s4 { left: calc(50% + 50px); top: 10px; width: 110px; height: 85px; }
+  .hint-s4-label { left: calc(50% + 58px); top: -22px; transform: rotate(-4deg); }
+
+  /* Slide 5: big downward arrow toward Start øvelse button */
+  .hint-s5 { left: calc(50% - 60px); top: 36px; width: 120px; height: 130px; }
+  .hint-s5-label { left: calc(50% - 100px); top: 12px; transform: rotate(-5deg); font-size: 26px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hint-arrow .curve { stroke-dashoffset: 0 !important; animation: none !important; }
+    .hint-arrow .head { opacity: 1 !important; animation: none !important; }
+    .hint-label { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .guide-slide.active .hint-wrap,
+    .guide-slide.active .mini-day-card,
+    .guide-slide.active .kbd-big,
+    .guide-slide.active .mini-overlay,
+    .guide-slide.active .mini-entry-row { animation: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -809,6 +949,11 @@
               <div class="m-num">DAG 1</div>
               <div class="m-date">Tirs. 21. Apr.</div>
             </div>
+            <svg class="hint-arrow hint-s1" viewBox="0 0 160 110">
+              <path class="curve" d="M 20 20 Q 110 5, 148 82" />
+              <path class="head" d="M 148 82 L 138 76 M 148 82 L 140 90" />
+            </svg>
+            <div class="hint-label hint-s1-label">Klik her</div>
           </div>
           <div class="guide-title">Vælg dagen</div>
           <div class="guide-sub">
@@ -823,6 +968,11 @@
             <div class="guide-cursor">A</div>
             <span class="guide-arrow">→</span>
             <div class="kbd-big">Tab</div>
+            <svg class="hint-arrow hint-s2" viewBox="0 0 140 110">
+              <path class="curve" d="M 120 22 Q 55 5, 18 78" />
+              <path class="head" d="M 18 78 L 26 72 M 18 78 L 22 88" />
+            </svg>
+            <div class="hint-label hint-s2-label">Tryk Tab</div>
           </div>
           <div class="guide-title">Tryk Tab for at starte</div>
           <div class="guide-sub">
@@ -842,6 +992,11 @@
               </div>
               <div class="m-text">Her skriver man tekst<span class="m-caret"></span></div>
             </div>
+            <svg class="hint-arrow hint-s3" viewBox="0 0 155 90">
+              <path class="curve" d="M 140 16 Q 85 -8, 14 58" />
+              <path class="head" d="M 14 58 L 24 55 M 14 58 L 22 65" />
+            </svg>
+            <div class="hint-label hint-s3-label">Skriv løs...</div>
           </div>
           <div class="guide-title">Skriv hvad der sker</div>
           <div class="guide-sub">
@@ -860,6 +1015,11 @@
               <span class="me-text">Her skriver man tekst</span>
               <span class="me-dur">0:11</span>
             </div>
+            <svg class="hint-arrow hint-s4" viewBox="0 0 110 85">
+              <path class="curve" d="M 95 12 Q 30 5, 14 60" />
+              <path class="head" d="M 14 60 L 22 55 M 14 60 L 18 68" />
+            </svg>
+            <div class="hint-label hint-s4-label">Tryk igen</div>
           </div>
           <div class="guide-title">Tryk Tab igen for at gemme</div>
           <div class="guide-sub">
@@ -870,12 +1030,16 @@
 
         <!-- Slide 5: Klar -->
         <div class="guide-slide" data-slide="5">
-          <div class="guide-visual" style="min-height:120px;">
-            <div style="font-size:52px;color:var(--orange);">▸</div>
+          <div class="guide-visual" style="min-height:180px;">
+            <svg class="hint-arrow hint-s5" viewBox="0 0 120 140">
+              <path class="curve" d="M 60 10 Q 18 70, 60 128" />
+              <path class="head" d="M 60 128 L 50 118 M 60 128 L 70 118" />
+            </svg>
+            <div class="hint-label hint-s5-label">Tryk her ↓</div>
           </div>
           <div class="guide-title">Klar til at øve?</div>
           <div class="guide-sub">
-            Tryk på <span class="kbd-sm">?</span> øverst i venstre hjørne hvis du vil se guiden igen.
+            Tryk på <span class="kbd-sm">?</span> i titlebaren hvis du vil se guiden igen senere.
           </div>
         </div>
 
